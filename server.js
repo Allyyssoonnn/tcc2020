@@ -10,6 +10,8 @@ const myfile = __dirname + '/home.html';
 const app = express();
 const dados = dadosquery();
 
+console.log("123");
+
 app.use(express.static('css'));
 app.use(express.static('img'));
 app.use(express.static('js'));
