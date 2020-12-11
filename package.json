@@ -1,0 +1,22 @@
+{
+  "name": "tcc",
+  "version": "1.0.0",
+  "description": "TCC",
+  "main": "controle.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "git": "^0.1.5",
+    "jsdom": "^16.4.0",
+    "knex": "^0.21.6",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Alyson Henrique de Lima da Silva",
+  "license": "ISC"
+}

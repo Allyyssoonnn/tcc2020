@@ -1,0 +1,186 @@
+body {
+    background-image: url(carfundo.jpg);
+    background-size: 1600px;
+}
+
+#h01 {
+    color: blueviolet;
+    font-size: 50px;
+    animation: h01 4s infinite alternate;
+}
+
+@keyframes h01 {
+    from {
+        font-size: 50px;
+    }
+
+    to {
+        font-size: 55px;
+    }
+}
+
+.menu {
+    /*border: 5px solid red;*/
+    height: 200px;
+    width: 400px;
+    padding: 20px;
+    position: relative;
+    left: 35%;
+    display: block;
+}
+
+.titulo {
+    height: 140px;
+    width: 100%;
+    text-align: center;
+    /*border: 1px solid red;*/
+
+    position: relative;
+}
+
+.container {
+    width: px;
+    height: 400px;
+    padding: 50px;
+    /*margin: 20px;*/
+
+    /*align-items: top;
+    justify-content: center;
+    display: flex;
+    border: 5px solid red;*/
+}
+
+#b01 {
+    width: 200px;
+    height: 90px;
+    background: silver;
+    text-align: center;
+    opacity: 0.9;
+    padding: 10px;
+    margin: 10px
+}
+
+#b01:hover {
+    opacity: 1;
+    width: 205px;
+    height: 95px;
+    border: 3px solid red;
+}
+
+#b02 {
+    width: 200px;
+    height: 90px;
+    background: silver;
+    text-align: center;
+    opacity: 0.9;
+    padding: 10px;
+    margin: 10px
+}
+
+#b02:hover {
+    opacity: 1;
+    width: 205px;
+    height: 95px;
+    border: 3px solid red;
+}
+
+#iniciar:hover {
+    width: 400px;
+    height: 80px;
+    border: 5px solid red;
+}
+
+#carros:hover {
+    width: 400px;
+    height: 80px;
+    border: 5px solid red;
+}
+
+#score {
+    height: 220px;
+    width: 290px;
+	border: 10px solid black;
+    border-radius: 10%;
+    opacity: 0.7;
+    
+    position: relative;
+    left: 80%;
+    bottom: 60%
+}
+
+#ranking {
+	font-size: 16px;
+    text-align: center;
+    color: black;
+    font-family: fantasy;
+}
+
+#player {
+	font-size: 20px;
+    /*border:  solid red;*/
+    position: relative;
+    left: 50px;
+    width: 35px;
+}
+
+#pontuacao {
+	font-size: 20px;
+    /*border:  solid red;*/
+    position: relative;
+    left: 210px;
+    bottom: 40px;
+    width: 35px;
+}
+
+#playerlist {
+	font-size: 16px;
+    text-align: left;
+    /*border: solid red;*/
+    margin-top: 0px;
+    width: 100px;
+    bottom: 55px;
+    position: relative;
+}
+
+#scorelist {
+	/*text-align: right;*/
+    position: relative;
+    /*border: solid red;*/
+    width: 40px;
+    left: 60%;
+    bottom: 160px;
+    font-size: 16px;
+    margin-top: 0px;
+}
+
+#cars {
+    height: 250px;
+    width: 550px;
+	border: 5px solid black;
+    position: relative;
+    left: 30%;
+    bottom: 15%;
+    display: none;
+    align-items: center;
+    color: snow;
+}
+
+#i1 {
+    margin: 3%;
+    width: 250px;
+    height: 200px;
+}
+
+#i1:hover {
+    border: 3px solid red;
+}
+
+#i2 {
+    margin: 3%;
+    width: 250px;
+    height: 200px;
+}
+
+#i2:hover {
+    border: 3px solid red;
+}

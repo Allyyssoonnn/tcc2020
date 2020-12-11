@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="home.css" media="screen">
+
+    <script src="score.js"></script>
+    <script src="home.js"></script>
+
+    <title>Inicio</title>
+</head>
+
+<button id="teste" onclick="testando()">teste</button>
+
+<body>
+    <div class="titulo">
+        <h1 id="h01">TCC drive:Waste of time</h1>
+    </div>
+
+    <div class="container">
+        <div class="menu" id="menu">
+            <a href="http://localhost:8080/stock"><img id="iniciar" src="iniciar.png" height="80" width="400"></a><br><br><br>
+            <img onclick="cars()" id="carros" src="carros.png" height="80" width="400">
+        </div>
+
+        <div class="flex-container" id="cars">
+            <div id="i1"><img onclick="back1()" src="car1.png" width="230" height="200"></div>
+            <div id="i2"><img onclick="back2()" src="car1.png" width="230" height="200"></div>
+        </div>
+
+        <img id="carpaper" src="carpaper.png" height="200" width="278">
+        <div id="score">
+            <p id="ranking">Ranking</p>
+            <p id="player">Player</p>
+            <p id="pontuacao">Score</p>
+            <ol id="playerlist">
+                <li id="p1"></li>
+                <li id="p2"></li>
+                <li id="p3"></li>
+                <li id="p4"></li>
+                <li id="p5"></li>
+            </ol>
+            <ul type="none" id="scorelist">
+                <li id="s1">567</li>
+                <li id="s2">123</li>
+                <li id="s3"></li>
+                <li id="s4"></li>
+                <li id="s5"></li>
+
+            </ul>
+        </div>
+    </div>
+</body>
+
+<footer>©Alyson 4ºT.I.A - TCC 2020</footer></html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Waste of time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="stock.css" media="screen">
+    <style>
+        canvas {
+            border: 10px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+
+    </style>
+</head>
+
+<body onload="startGame()" onkeydown="teclado(event)">
+    <audio id="loser" src="loser.mp3"></audio>
+    <script>
+        var myGamePiece;
+        var myObstacles = [];
+        var myScore;
+        var myBackground;
+
+        function startGame() {
+            myGamePiece = new component(180, 120, "car1.png", 10, 120, "image");
+            myScore = new component("30px", "Consolas", "white", 600, 40, "text");
+            myBackground = new component(1500, 400, "rua.jpg", 0, 50, "background");
+            myGameArea.start();
+        }
+
+        var myGameArea = {
+            canvas: document.createElement("canvas"),
+            start: function() {
+                this.canvas.width = 1500;
+                this.canvas.height = 500;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                this.frameNo = 0;
+                this.interval = setInterval(updateGameArea, 2);
+            },
+            clear: function() {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        }
+
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            if (type == "image" || type == "background") {
+                this.image = new Image();
+                this.image.src = color;
+            }
+            this.score = 0;
+            this.width = width;
+            this.height = height;
+            this.speedX = 0;
+            this.speedY = 0;
+            this.x = x;
+            this.y = y;
+            this.gravity = 0;
+            this.gravitySpeed = 0;
+            this.update = function() {
+                ctx = myGameArea.context;
+
+
+                if (this.type == "text") {
+                    ctx.font = this.width + " " + this.height;
+                    ctx.fillStyle = color;
+                    ctx.fillText(this.text, this.x, this.y);
+                }
+
+                if (type == "background") {
+                    ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+                }
+
+                if (type == "image" || type == "background") {
+                    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+                } else {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
+            this.newPos = function() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.type == "background") {
+                    if (this.x == -(this.width)) {
+                        this.x = 0;
+                    }
+                }
+            }
+            this.hitBottom = function() {
+                var rockbottom = myGameArea.canvas.height - this.height;
+                if (this.y > rockbottom) {
+                    this.y = rockbottom;
+                    this.gravitySpeed = 0;
+                }
+            }
+            this.crashWith = function(otherobj) {
+                var myleft = this.x;
+                var myright = this.x + (this.width);
+                var mytop = this.y;
+                var mybottom = this.y + (this.height);
+                var otherleft = otherobj.x;
+                var otherright = otherobj.x + (otherobj.width);
+                var othertop = otherobj.y;
+                var otherbottom = otherobj.y + (otherobj.height);
+                var crash = true;
+                if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                    crash = false;
+                }
+                return crash;
+            }
+        }
+
+        function updateGameArea() {
+            var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myGamePiece.crashWith(myObstacles[i])) {
+                    document.getElementById("loser").play();
+                    return;
+                }
+            }
+            myGameArea.clear();
+            myGameArea.frameNo += 1;
+            myBackground.speedX = -1;
+            myBackground.newPos();
+            myBackground.update();
+            if (myGameArea.frameNo == 1 || everyinterval(500)) {
+                x = myGameArea.canvas.width;
+                height = Math.floor(Math.random() * 11);
+                minGap = 500;
+                maxGap = 200;
+                gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+
+                if (height % 2 == 0) {
+                    myObstacles.push(new component(150, 100, "pedra.png", x, 80, "image"));
+                } else {
+                    myObstacles.push(new component(150, 100, "pedra.png", x, 300, "image"));
+                }
+                myObstacles.push(new component(1500, 50, "grama.jpg", 0, 0, "background"))
+                myObstacles.push(new component(1500, 50, "grama.jpg", 0, 450, "background"))
+            }
+
+            for (i = 0; i < myObstacles.length; i += 1) {
+                myObstacles[i].x += -1;
+                myObstacles[i].update();
+            }
+            myScore.text = "Distância: " + myGameArea.frameNo;
+            myScore.update();
+            myGamePiece.newPos();
+            myGamePiece.update();
+        }
+
+        function everyinterval(n) {
+            if ((myGameArea.frameNo / n) % 1 == 0) {
+                return true;
+            }
+            return false;
+        }
+
+        function esquerda() {
+            myGamePiece.speedY -= 1;
+        }
+
+        function acelerar() {
+            myGamePiece.speedX += 1;
+        }
+
+        function re() {
+            myGamePiece.speedX -= 1;
+        }
+
+        function direita() {
+            myGamePiece.speedY += 1;
+        }
+
+        function teclado(event) {
+            var x = event.key;
+
+            if (event.key == "ArrowUp") {
+                myGamePiece.speedY -= 1;
+            }
+
+            if (event.key == "ArrowDown") {
+                myGamePiece.speedY += 1;
+            }
+
+            if (event.key == "ArrowRight") {
+                myGamePiece.speedX += 1;
+            }
+
+            if (event.key == "ArrowLeft") {
+                myGamePiece.speedX -= 1;
+            }
+        }
+
+    </script>
+    <div id="back" style="text-align: left">
+        <a href="http://localhost:8080/"><button>Voltar</button></a>
+    </div>
+    <div style="text-align:center;">
+        <br>
+        <button onclick="esquerda()">ESQUERDA</button><br><br>
+        <button onclick="re()">RÉ</button>
+        <button onclick="acelerar()">ACELERAR</button><br><br>
+        <button onclick="direita()">DIREITA</button>
+        <p>©Alyson 4ºT.I.A - TCC 2020</p>
+    </div>
+</body>
+
+</html>
